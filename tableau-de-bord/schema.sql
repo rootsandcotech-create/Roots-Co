@@ -1,0 +1,9 @@
+-- Schéma MySQL du tableau de bord ROOTS (à importer dans phpMyAdmin, jeu de caractères utf8mb4)
+CREATE TABLE projets (id VARCHAR(12) PRIMARY KEY, nom VARCHAR(120), description TEXT, objectifs TEXT, responsable VARCHAR(80), statut VARCHAR(40), avancement TINYINT, echeance DATE NULL) CHARACTER SET utf8mb4;
+CREATE TABLE publications (id VARCHAR(16) PRIMARY KEY, type VARCHAR(20), projet_id VARCHAR(12), titre VARCHAR(200), canal VARCHAR(20), date_prevue DATE, heure_prevue TIME, visuel VARCHAR(255), statut ENUM('Anticipé','À faire','Validé','Publié','Reporté','Bloqué') DEFAULT 'Anticipé', valide_par VARCHAR(80) NULL, valide_le DATETIME NULL, alerte_48h_envoyee TINYINT DEFAULT 0, note TEXT) CHARACTER SET utf8mb4;
+CREATE TABLE historique (id INT AUTO_INCREMENT PRIMARY KEY, publication_id VARCHAR(16), ancien_statut VARCHAR(20), nouveau_statut VARCHAR(20), auteur VARCHAR(80), fait_le DATETIME DEFAULT CURRENT_TIMESTAMP, commentaire TEXT) CHARACTER SET utf8mb4;
+CREATE TABLE taches (id VARCHAR(12) PRIMARY KEY, projet_id VARCHAR(12), titre TEXT, statut VARCHAR(20), echeance DATE NULL) CHARACTER SET utf8mb4;
+CREATE TABLE evenements (id VARCHAR(12) PRIMARY KEY, nom VARCHAR(200), debut DATE, fin DATE NULL, pays VARCHAR(60), categorie VARCHAR(60), source TEXT, fiabilite VARCHAR(60)) CHARACTER SET utf8mb4;
+CREATE TABLE canaux_mesures (id INT AUTO_INCREMENT PRIMARY KEY, canal VARCHAR(30), releve_le DATE, abonnes INT, publications INT) CHARACTER SET utf8mb4;
+CREATE TABLE controles_securite (id INT AUTO_INCREMENT PRIMARY KEY, intitule VARCHAR(200), detail TEXT, statut VARCHAR(20), verifie_le DATE NULL) CHARACTER SET utf8mb4;
+CREATE TABLE contacts (id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(120), entreprise VARCHAR(120), canal VARCHAR(30), email VARCHAR(160), base_legale VARCHAR(60), date_accord DATE NULL, suite TEXT) CHARACTER SET utf8mb4;
