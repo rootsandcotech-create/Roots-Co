@@ -1,0 +1,9 @@
+Options -Indexes
+<FilesMatch "^(config\.php|config\.sample\.php|schema\.sql|README\.md|app\.html|lib\.php)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
